@@ -5,7 +5,17 @@
     android:orientation="vertical"
     android:padding="16dp">
 
-    <!-- Title -->
+    <ImageView
+        android:id="@+id/profileImage"
+        android:layout_width="80dp"
+        android:layout_height="80dp"
+        android:layout_gravity="center"
+        android:src="@drawable/logo"
+        android:scaleType="centerCrop"
+        android:background="@drawable/rounded_image"
+        android:clipToOutline="true"
+        android:layout_marginBottom="12dp"/>
+
     <TextView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -15,7 +25,7 @@
         android:gravity="center"
         android:layout_marginBottom="36dp"/>
 
-    <!-- First Name Row -->
+
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -36,7 +46,7 @@
             android:inputType="textPersonName"/>
     </LinearLayout>
 
-    <!-- Second Name Row -->
+
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -57,7 +67,7 @@
             android:inputType="textPersonName"/>
     </LinearLayout>
 
-    <!-- Email Row -->
+
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -78,7 +88,7 @@
             android:inputType="textEmailAddress"/>
     </LinearLayout>
 
-    <!-- Phone Row -->
+
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -99,7 +109,7 @@
             android:inputType="phone"/>
     </LinearLayout>
 
-    <!-- Buttons Row -->
+
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -112,23 +122,29 @@
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:text="Register"
-            android:layout_marginEnd="16dp"/>
+            android:layout_marginEnd="16dp"
+            android:onClick="handleRegister"/>
 
         <Button
             android:id="@+id/cancelBtn"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:text="Cancel"/>
+            android:text="Cancel"
+            android:onClick="handleCancel"/>
+
     </LinearLayout>
 
-    <!-- Login -->
+
     <TextView
         android:id="@+id/loginText"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Already have an account? Login"
         android:textColor="#0000FF"
-        android:layout_gravity="center"/>
+        android:layout_gravity="center"
+        android:onClick="handleLogin"
+        android:clickable="true"
+        android:focusable="true"/>
 
 </LinearLayout>
