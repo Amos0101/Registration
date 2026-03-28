@@ -7,8 +7,13 @@ import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 
-public class MainActivity extends AppCompatActivity {
+import java.util.HashMap;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
 
+
+public class MainActivity extends AppCompatActivity {
+    DatabaseReference databaseReference;
     // Declare variables (class level)
     EditText firstName, secondName, email, phone;
 
@@ -16,6 +21,8 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
+        databaseReference = FirebaseDatabase.getInstance().getReference("Users");
 
         // Mapping XML IDs to Java variables
         firstName = findViewById(R.id.firstName);
@@ -25,12 +32,24 @@ public class MainActivity extends AppCompatActivity {
     }
 
     public void handleRegister(View view){
-        String fName = firstName.getText().toString();
-        String sName = secondName.getText().toString();
-        String emailVal = email.getText().toString();
-        String phoneVal = phone.getText().toString();
 
-        Toast.makeText(this, "Register Clicked",Toast.LENGTH_SHORT).show();
+        String fName = firstName.getText().toString().trim();
+        String sName = secondName.getText().toString().trim();
+        String emailVal = email.getText().toString().trim();
+        String phoneVal = phone.getText().toString().trim();
+
+        // Basic validation
+        if (fName.isEmpty() || sName.isEmpty() || emailVal.isEmpty() || phoneVal.isEmpty()) {
+            Toast.makeText(this, "All fields are required", Toast.LENGTH_SHORT).show();
+            return;
+        }
+
+        User user = new User(fName, sName, emailVal, phoneVal);
+
+        // Save to Firebase
+        databaseReference.child(fName).setValue(user);
+
+        Toast.makeText(this, "Saved to Firebase", Toast.LENGTH_SHORT).show();
     }
 
     public void handleCancel(View view){
@@ -46,5 +65,31 @@ public class MainActivity extends AppCompatActivity {
     public void handleLogin(View view){
         Toast.makeText(this,"Go to login",Toast.LENGTH_SHORT).show();
     }
+
+    public class User {
+        private String firstName;
+        private String secondName;
+        private String email;
+        private String phone;
+
+        // Required empty constructor (important for Firebase or serialization)
+        public User() {}
+
+        public User(String firstName, String secondName, String email, String phone) {
+            this.firstName = firstName;
+            this.secondName = secondName;
+            this.email = email;
+            this.phone = phone;
+        }
+
+        // Getters
+        public String getFirstName() { return firstName; }
+        public String getSecondName() { return secondName; }
+        public String getEmail() { return email; }
+        public String getPhone() { return phone; }
+    }
+    HashMap<String, User> users = new HashMap<>();
+
+
 }
 
