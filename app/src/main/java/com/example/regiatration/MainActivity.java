@@ -7,7 +7,6 @@ import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 
-import java.util.HashMap;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 
@@ -66,29 +65,8 @@ public class MainActivity extends AppCompatActivity {
         Toast.makeText(this,"Go to login",Toast.LENGTH_SHORT).show();
     }
 
-    public class User {
-        private String firstName;
-        private String secondName;
-        private String email;
-        private String phone;
 
-        // Required empty constructor (important for Firebase or serialization)
-        public User() {}
 
-        public User(String firstName, String secondName, String email, String phone) {
-            this.firstName = firstName;
-            this.secondName = secondName;
-            this.email = email;
-            this.phone = phone;
-        }
-
-        // Getters
-        public String getFirstName() { return firstName; }
-        public String getSecondName() { return secondName; }
-        public String getEmail() { return email; }
-        public String getPhone() { return phone; }
-    }
-    HashMap<String, User> users = new HashMap<>();
 
 
 }
